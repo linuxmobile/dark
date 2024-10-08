@@ -12,7 +12,6 @@
     <p class="text-red-500">Color not found</p>
   </div>
 </template>
-
 <script setup lang="ts">
 const route = useRoute();
 const colors = [

@@ -1,9 +1,11 @@
 <template>
-    <div ref="cursor" class="z-10 absolute -top-3 -left-3 size-6 bg-white mix-blend-difference pointer-events-none transition-all animate-ease-in-out duration-75" id="cursor"></div>
+  <div ref="cursor" class="z-10 absolute -top-3 -left-3 size-6 bg-white mix-blend-difference pointer-events-none transition-all animate-ease-in-out duration-75" id="cursor"></div>
   <NuxtPage />
 </template>
 <script setup>
 import { usePointer } from "@vueuse/core";
+
+const { saveScrollPosition } = useScrollPosition();
 
 useHead({
 	htmlAttrs: {
@@ -29,6 +31,11 @@ watch([x, y], () => {
 		cursor.value.style.transform = `translate3d(${adjustedX}px, ${adjustedY}px, 0)`;
 	}
 });
+
+useRouter().beforeEach((to, from, next) => {
+	saveScrollPosition();
+	next();
+});
 </script>
 <style>
 @font-face {
@@ -37,15 +44,5 @@ watch([x, y], () => {
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
 }
 </style>
