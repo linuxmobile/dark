@@ -24,7 +24,9 @@ const cursor = ref(null);
 
 watch([x, y], () => {
 	if (cursor.value) {
-		cursor.value.style.transform = `translate3d(${x.value}px, ${y.value}px, 0)`;
+		const adjustedX = x.value + window.scrollX;
+		const adjustedY = y.value + window.scrollY;
+		cursor.value.style.transform = `translate3d(${adjustedX}px, ${adjustedY}px, 0)`;
 	}
 });
 </script>
