@@ -11,7 +11,6 @@
   </main>
 </template>
 <script setup lang="ts">
-const router = useRouter();
 const { restoreScrollPosition } = useScrollPosition();
 
 const colors = [

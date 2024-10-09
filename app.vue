@@ -32,7 +32,8 @@ watch([x, y], () => {
 	}
 });
 
-useRouter().beforeEach((to, from, next) => {
+const router = useRouter();
+router.beforeEach((to, from, next) => {
 	saveScrollPosition();
 	next();
 });
@@ -44,5 +45,14 @@ useRouter().beforeEach((to, from, next) => {
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+*,html,body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 </style>
