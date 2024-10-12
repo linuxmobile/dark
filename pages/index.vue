@@ -8,6 +8,7 @@
       :hex="color.hex"
       :rgb="color.rgb"
     />
+    <Details />
   </main>
 </template>
 <script setup lang="ts">

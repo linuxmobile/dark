@@ -1,5 +1,5 @@
 <template>
-  <div ref="cursor" class="z-10 absolute -top-3 -left-3 size-6 bg-white mix-blend-difference pointer-events-none transition-all animate-ease-in-out duration-75" id="cursor"></div>
+  <div ref="cursor" class="z-50 absolute -top-3 -left-3 size-6 bg-white mix-blend-difference pointer-events-none transition-all animate-ease-in-out duration-75" id="cursor"></div>
   <NuxtPage />
 </template>
 <script setup>
