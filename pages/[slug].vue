@@ -1,7 +1,7 @@
 <template>
   <div v-if="color" :style="{ backgroundColor: color.hex }" class="font-display min-h-full h-full min-w-full flex flex-col items-start justify-between rounded-3xl p-6 overflow-hidden relative select-none">
     <NuxtLink to="/" class="absolute top-0 left-0 w-full h-full z-10"></NuxtLink>
-    <p class="text-9xl font-semibold">{{ color.name }}</p>
+    <p class="text-4xl md:text-9xl font-semibold">{{ color.name }}</p>
     <div class="w-full flex items-end justify-end z-20">
       <div class="flex flex-col items-start text-2xl opacity-60 relative">
         <div class="relative group">

@@ -1,5 +1,5 @@
 <template>
-  <main class="grid grid-cols-1 lg:grid-cols-12 grid-rows-6 gap-6 pb-6 mx-auto select-none">
+  <main class="grid grid-cols-auto lg:grid-cols-12 grid-rows-6 gap-6 pb-6 mx-auto select-none">
     <Tiles
       v-for="(color, index) in colors"
       :key="index"
