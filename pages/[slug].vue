@@ -1,19 +1,50 @@
 <template>
-  <NuxtLink to="/" v-if="color" :style="{ backgroundColor: color.hex }" class="font-display min-h-full h-full min-w-full flex flex-col items-start justify-between rounded-3xl p-6 overflow-hidden">
-    <p class="text-2xl font-semibold">{{ color.name }}</p>
-    <div class="w-full flex items-end justify-end">
-      <div class="flex flex-col items-start text-lg opacity-60">
-        <p>HEX: {{ color.hex }}</p>
-        <p>RGB: {{ color.rgb }}</p>
+  <div v-if="color" :style="{ backgroundColor: color.hex }" class="font-display min-h-full h-full min-w-full flex flex-col items-start justify-between rounded-3xl p-6 overflow-hidden relative select-none">
+    <NuxtLink to="/" class="absolute top-0 left-0 w-full h-full z-10"></NuxtLink>
+    <p class="text-9xl font-semibold">{{ color.name }}</p>
+    <div class="w-full flex items-end justify-end z-20">
+      <div class="flex flex-col items-start text-2xl opacity-60 relative">
+        <div class="relative group">
+          <p @mouseenter="showCopyButton('hex')" @mouseleave="hideCopyButton('hex')" class="flex gap-x-2 items-center z-20 cursor-default"><span class=""><CopyIcon /></span> HEX: {{ color.hex }}</p>
+          <div v-show="hoverHex" @mouseenter="keepHover('hex')" @mouseleave="hideCopyButton('hex')" @click="copyToClipboard(color.hex)" class="absolute -top-8 -left-20 bg-gray-300 text-black rounded-md px-2 py-1 w-fit font-medium cursor-pointer">Copy</div>
+        </div>
+        <div class="relative group">
+          <p @mouseenter="showCopyButton('rgb')" @mouseleave="hideCopyButton('rgb')" class="flex gap-x-2 items-center z-20 cursor-default"><span class=""><CopyIcon /></span> RGB: {{ color.rgb }}</p>
+          <div v-show="hoverRgb" @mouseenter="keepHover('rgb')" @mouseleave="hideCopyButton('rgb')" @click="copyToClipboard(color.rgb)" class="absolute -top-5 -left-20 bg-gray-300 text-black rounded-md px-2 py-1 w-fit font-medium cursor-pointer">Copy</div>
+        </div>
       </div>
     </div>
-  </NuxtLink>
+  </div>
   <div v-else>
     <p class="text-red-500">Color not found</p>
   </div>
 </template>
+
 <script setup lang="ts">
 const route = useRoute();
+const { isCopied, copyToClipboard } = useClipboard();
+
+const hoverHex = ref(false);
+const hoverRgb = ref(false);
+let hoverTimeout: NodeJS.Timeout;
+
+const showCopyButton = (type: "hex" | "rgb") => {
+	clearTimeout(hoverTimeout);
+	if (type === "hex") hoverHex.value = true;
+	if (type === "rgb") hoverRgb.value = true;
+};
+
+const hideCopyButton = (type: "hex" | "rgb") => {
+	hoverTimeout = setTimeout(() => {
+		if (type === "hex") hoverHex.value = false;
+		if (type === "rgb") hoverRgb.value = false;
+	}, 500);
+};
+
+const keepHover = (type: "hex" | "rgb") => {
+	clearTimeout(hoverTimeout);
+};
+
 const colors = [
 	{ name: "Charcoal Gray", hex: "#121212", rgb: "rgb(18, 18, 18)" },
 	{ name: "Dark Slate Gray", hex: "#191919", rgb: "rgb(25, 25, 25)" },
