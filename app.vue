@@ -9,7 +9,7 @@ const { saveScrollPosition } = useScrollPosition();
 
 useHead({
 	htmlAttrs: {
-		class: "bg-black text-white p-6 h-full w-full relative",
+		class: "bg-white text-black p-6 h-full w-full relative",
 	},
 	title: "Dark",
 	meta: [
